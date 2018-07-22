@@ -125,12 +125,21 @@
                 $('.choice').eq(choice).css({'background-color':'#50D943'});
                 $('#explanation').html('<strong>Correct!</strong> ' + htmlEncode(quiz[currentquestion]['explanation']));
                 score++;
+				currentquestion++;
+				
+				if(currentquestion == quiz.length){
+					ContinueButtonText = 'DONE &raquo;';
+				} else {
+					ContinueButtonText = 'NEXT QUESTION &raquo;';
+				}
             } else {
                 $('.choice').eq(choice).css({'background-color':'#D92623'});
                 $('#explanation').html('<strong>Incorrect.</strong> ' + htmlEncode(quiz[currentquestion]['explanation']));
+				
+				ContinueButtonText = 'TRY AGAIN &raquo;';
             }
-            currentquestion++;
-            $('#submitbutton').html('NEXT QUESTION &raquo;').on('click', function(){
+			
+            $('#submitbutton').html(ContinueButtonText).on('click', function(){
                 if(currentquestion == quiz.length){
                     endQuiz();
                 } else {
